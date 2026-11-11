@@ -11,7 +11,7 @@ def test_debug_login(page):
     print("Page Title:", page.title())
 
     # Pause execution and open Playwright Inspector
-    page.pause()
+    # page.pause()
 
     # Login
     page.get_by_placeholder("Username").fill("standard_user")

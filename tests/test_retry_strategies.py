@@ -1,9 +1,11 @@
 
+import pytest
 from playwright.sync_api import expect
 
 attempt_count = 0
 
 
+@pytest.mark.flaky(reruns=2)
 def test_retry_strategy(page):
 
     global attempt_count

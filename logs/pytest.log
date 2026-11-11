@@ -1,0 +1,11 @@
+INFO     QA_Automation:test_logging_reporting.py:38 Opening SauceDemo website
+INFO     QA_Automation:test_logging_reporting.py:42 Entering login credentials
+INFO     QA_Automation:test_logging_reporting.py:47 Clicking login button
+INFO     QA_Automation:test_logging_reporting.py:51 Verifying successful login
+INFO     QA_Automation:test_logging_reporting.py:57 Login test passed successfully
+INFO     API_Testing:test_validation_logging_reporting.py:43 Sending GET request
+INFO     API_Testing:test_validation_logging_reporting.py:50 Status Code: 200
+INFO     API_Testing:test_validation_logging_reporting.py:55 Status code validation passed
+INFO     API_Testing:test_validation_logging_reporting.py:60 Response Post ID: 1
+INFO     API_Testing:test_validation_logging_reporting.py:65 Response data validation passed
+INFO     API_Testing:test_validation_logging_reporting.py:66 API test completed successfully

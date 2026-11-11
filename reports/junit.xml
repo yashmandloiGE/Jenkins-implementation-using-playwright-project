@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="2" failures="12" skipped="0" tests="97" time="210.761" timestamp="2026-11-11T12:43:22.545382+05:30" hostname="DESKTOP-4925945"><testcase classname="tests.api.test_api_chaining" name="test_api_chaining" time="1.242" /><testcase classname="tests.api.test_api_requests" name="test_get_request" time="0.360" /><testcase classname="tests.api.test_api_requests" name="test_post_request" time="0.484" /><testcase classname="tests.api.test_api_requests" name="test_put_request" time="0.520" /><testcase classname="tests.api.test_api_requests" name="test_patch_request" time="0.503" /><testcase classname="tests.api.test_api_requests" name="test_delete_request" time="0.463" /><testcase classname="tests.api.test_authentication_workflows" name="test_basic_authentication" time="0.851" /><testcase classname="tests.api.test_authentication_workflows" name="test_bearer_token_authentication" time="0.822" /><testcase classname="tests.api.test_dynamic_payloads" name="test_send_json_payload" time="0.755" /><testcase classname="tests.api.test_dynamic_payloads" name="test_get_json_response" time="0.799" /><testcase classname="tests.api.test_dynamic_response" name="test_dynamic_response_handling" time="0.388" /><testcase classname="tests.api.test_dynamic_response" name="test_dynamic_array_handling" time="0.392" /><testcase classname="tests.api.test_environment_config" name="test_api_environment_configuration" time="0.381" /><testcase classname="tests.api.test_headers_tokens" name="test_custom_headers" time="0.795" /><testcase classname="tests.api.test_headers_tokens" name="test_bearer_token" time="0.818" /><testcase classname="tests.test_allure_reporting" name="test_allure_login" time="6.124" /><testcase classname="tests.test_allure_reporting" name="test_allure_add_to_cart" time="3.475" /><testcase classname="tests.test_api_mocking" name="test_mock_api_response" time="0.539" /><testcase classname="tests.test_assertions_validations" name="test_successful_login" time="0.002"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_successful_login():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_assertions_validations.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x0000018664157C50&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_assertions_validations" name="test_invalid_login" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_invalid_login():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_assertions_validations.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x00000186641CB890&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_authentication_state" name="test_authenticated_access" time="2.789" /><testcase classname="tests.test_authentication_state" name="test_unauthenticated_access" time="1.481" /><testcase classname="tests.test_authentication_state" name="test_logout_session" time="13.456"><failure message="AssertionError: Locator expected to be visible&#10;Actual value: hidden &#10;Call log:&#10;  - Expect &quot;to_be_visible&quot; locator(&quot;#logout_sidebar_link&quot;) with timeout 10000ms&#10;  - waiting for locator(&quot;#logout_sidebar_link&quot;)&#10;    23 × locator resolved to &lt;a href=&quot;#&quot; role=&quot;button&quot; id=&quot;logout_sidebar_link&quot; class=&quot;bm-item menu-item&quot; data-test=&quot;logout-sidebar-link&quot;&gt;Logout&lt;/a&gt;&#10;       - unexpected value &quot;hidden&quot;&#10;&#10;Aria snapshot:&#10;- banner:&#10;  - button &quot;Open Menu&quot;&#10;  - img &quot;Open Menu&quot;&#10;  - text: Swag Labs&#10;[+50 more lines; full report in element text]">page = &lt;Page url='https://www.saucedemo.com/inventory.html'&gt;
+
+    def test_logout_session(page):
+    
+        login(page)
+    
+        # Open sidebar menu
+        page.locator("#react-burger-menu-btn").click()
+    
+        # Locate logout link
+        logout_link = page.locator("#logout_sidebar_link")
+    
+        # Wait until sidebar logout link becomes visible
+&gt;       expect(logout_link).to_be_visible(timeout=10000)
+E       AssertionError: Locator expected to be visible
+E       Actual value: hidden 
+E       Call log:
+E         - Expect "to_be_visible" locator("#logout_sidebar_link") with timeout 10000ms
+E         - waiting for locator("#logout_sidebar_link")
+E           23 × locator resolved to &lt;a href="#" role="button" id="logout_sidebar_link" class="bm-item menu-item" data-test="logout-sidebar-link"&gt;Logout&lt;/a&gt;
+E              - unexpected value "hidden"
+E       
+E       Aria snapshot:
+E       - banner:
+E         - button "Open Menu"
+E         - img "Open Menu"
+E         - text: Swag Labs
+E         - button "Cart, empty"
+E         - text: Products Name (A to Z)
+E         - combobox "Sort products":
+E           - option "Name (A to Z)" [selected]
+E           - option "Name (Z to A)"
+E           - option "Price (low to high)"
+E           - option "Price (high to low)"
+E       - main:
+E         - button "View details for Sauce Labs Backpack":
+E           - img "Sauce Labs Backpack"
+E         - button "View details for Sauce Labs Backpack": Sauce Labs Backpack
+E         - text: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. $29.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Bike Light":
+E           - img "Sauce Labs Bike Light"
+E         - button "View details for Sauce Labs Bike Light": Sauce Labs Bike Light
+E         - text: A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included. $9.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Bolt T-Shirt":
+E           - img "Sauce Labs Bolt T-Shirt"
+E         - button "View details for Sauce Labs Bolt T-Shirt": Sauce Labs Bolt T-Shirt
+E         - text: Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt. $15.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Fleece Jacket":
+E           - img "Sauce Labs Fleece Jacket"
+E         - button "View details for Sauce Labs Fleece Jacket": Sauce Labs Fleece Jacket
+E         - text: It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office. $49.99
+E         - button "Add to cart"
+E         - button "View details for Sauce Labs Onesie":
+E           - img "Sauce Labs Onesie"
+E         - button "View details for Sauce Labs Onesie": Sauce Labs Onesie
+E         - text: Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel. $7.99
+E         - button "Add to cart"
+E         - button "View details for Test.allTheThings() T-Shirt (Red)":
+E           - img "Test.allTheThings() T-Shirt (Red)"
+E         - button "View details for Test.allTheThings() T-Shirt (Red)": Test.allTheThings() T-Shirt (Red)
+E         - text: This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton. $15.99
+E         - button "Add to cart"
+E       - contentinfo:
+E         - list:
+E           - listitem:
+E             - link "X":
+E               - /url: https://x.com/saucelabs
+E           - listitem:
+E             - link "Facebook":
+E               - /url: https://www.facebook.com/saucelabs
+E           - listitem:
+E             - link "LinkedIn":
+E               - /url: https://www.linkedin.com/company/sauce-labs/
+E         - text: © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy
+
+tests\test_authentication_state.py:49: AssertionError</failure></testcase><testcase classname="tests.test_auto_waiting" name="test_playwright_auto_waiting" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_playwright_auto_waiting():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_auto_waiting.py:7: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x0000018664243230&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_browser_permissions" name="test_geolocation_permission" time="1.239" /><testcase classname="tests.test_builtin_locators" name="test_builtin_locators" time="3.417" /><testcase classname="tests.test_conftest_usage" name="test_login_page" time="1.387" /><testcase classname="tests.test_conftest_usage" name="test_successful_login" time="2.844" /><testcase classname="tests.test_conftest_usage" name="test_products_count" time="2.867" /><testcase classname="tests.test_css_locators" name="test_css_locators" time="3.873" /><testcase classname="tests.test_data_management" name="test_login_with_external_data[data0]" time="3.905" /><testcase classname="tests.test_data_management" name="test_login_with_external_data[data1]" time="2.896" /><testcase classname="tests.test_debug" name="test_debug_login" time="43.525" /><testcase classname="tests.test_environment_configurations" name="test_environment_configuration" time="1.303" /><testcase classname="tests.test_execution_model" name="test_playwright_execution_model" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_playwright_execution_model():
+    
+        # 1. Start Playwright
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_execution_model.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x00000186642428B0&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_file_uploads_downloads" name="test_file_upload" time="1.132" /><testcase classname="tests.test_file_uploads_downloads" name="test_file_download" time="1.638" /><testcase classname="tests.test_fixtures_scopes" name="test_homepage" time="0.001"><error message="failed on setup with &quot;playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.&quot;">@pytest.fixture(scope="session")
+    def browser():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_fixtures_scopes.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x000001866420B0B0&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</error></testcase><testcase classname="tests.test_fixtures_scopes" name="test_login_page" time="0.001"><error message="failed on setup with &quot;playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.&quot;">@pytest.fixture(scope="session")
+    def browser():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_fixtures_scopes.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x000001866420B0B0&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</error></testcase><testcase classname="tests.test_flaky_debugging" name="test_debug_flaky_test" time="2.759" /><testcase classname="tests.test_framework_configuration" name="test_framework_configuration" time="1.270" /><testcase classname="tests.test_hooks_plugins" name="test_hooks_page_heading" time="0.361" /><testcase classname="tests.test_hooks_plugins" name="test_hooks_button_click" time="0.951" /><testcase classname="tests.test_html_reporting" name="test_login_page" time="1.296" /><testcase classname="tests.test_html_reporting" name="test_successful_login" time="2.912" /><testcase classname="tests.test_html_reporting" name="test_products_count" time="2.836" /><testcase classname="tests.test_locator" name="test_saucedemo_login_with_locators" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_saucedemo_login_with_locators():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_locator.py:6: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x00000186659F46B0&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_logging_reporting" name="test_logging_and_reporting" time="2.776" /><testcase classname="tests.test_markers" name="test_login" time="2.907" /><testcase classname="tests.test_markers" name="test_add_product_to_cart" time="3.647" /><testcase classname="tests.test_markers" name="test_products_page" time="1.420" /><testcase classname="tests.test_modern_locators" name="test_modern_locator_strategies" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_modern_locator_strategies():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_modern_locators.py:7: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x00000186659F4050&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_multiple_tabs_sessions" name="test_multiple_tabs_and_sessions" time="3.284" /><testcase classname="tests.test_network_interception" name="test_network_interception" time="1.656" /><testcase classname="tests.test_page_object_model" name="test_login_and_add_product" time="3.406" /><testcase classname="tests.test_parallel_execution" name="test_login" time="3.047" /><testcase classname="tests.test_parallel_execution" name="test_products_count" time="2.846" /><testcase classname="tests.test_parallel_execution" name="test_add_to_cart" time="3.413" /><testcase classname="tests.test_parallel_execution" name="test_cart_page" time="3.625" /><testcase classname="tests.test_parametrization" name="test_login_with_multiple_credentials[standard_user-secret_sauce-success]" time="3.071" /><testcase classname="tests.test_parametrization" name="test_login_with_multiple_credentials[wrong_user-wrong_password-failure]" time="2.897" /><testcase classname="tests.test_parametrization" name="test_login_with_multiple_credentials[locked_out_user-secret_sauce-failure]" time="2.853" /><testcase classname="tests.test_playwright_reporting" name="test_homepage_reporting" time="0.465" /><testcase classname="tests.test_playwright_reporting" name="test_button_reporting" time="0.988" /><testcase classname="tests.test_playwright_reporting" name="test_title_reporting" time="0.497" /><testcase classname="tests.test_pytest_architecture" name="test_page_title" time="0.004"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_page_title():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_pytest_architecture.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x000001866593BE50&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_pytest_architecture" name="test_page_heading" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_page_heading():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_pytest_architecture.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x0000018665989D50&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_retry_mechanisms" name="test_retry_mechanism" time="0.505" /><testcase classname="tests.test_retry_mechanisms" name="test_retry_mechanism" time="0.412" /><testcase classname="tests.test_retry_strategies" name="test_retry_strategy" time="0.363" /><testcase classname="tests.test_retry_strategies" name="test_retry_strategy" time="0.527" /><testcase classname="tests.test_reusable_utilities" name="test_products_using_fixture" time="2.953" /><testcase classname="tests.test_reusable_utilities" name="test_add_product_using_utility" time="3.404" /><testcase classname="tests.test_screenshots_on_failure" name="test_screenshot_on_failure" time="6.282"><failure message="AssertionError: Locator expected to have text 'Wrong Username'&#10;Actual value:  &#10;Call log:&#10;  - Expect &quot;to_have_text&quot; locator(&quot;#user-name&quot;) with timeout 5000ms&#10;  - waiting for locator(&quot;#user-name&quot;)&#10;    14 × locator resolved to &lt;input value=&quot;&quot; type=&quot;text&quot; id=&quot;user-name&quot; name=&quot;user-name&quot; autocorrect=&quot;off&quot; data-test=&quot;username&quot; aria-label=&quot;Username&quot; autocapitalize=&quot;none&quot; placeholder=&quot;Username&quot; class=&quot;input_error form_input&quot;/&gt;&#10;       - unexpected value &quot;&quot;&#10;&#10;Aria snapshot:&#10;- textbox &quot;Username&quot;">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_screenshot_on_failure(page):
+    
+        page.goto("https://www.saucedemo.com/")
+    
+        # Intentionally incorrect assertion to demonstrate
+        # automatic screenshot capture
+    
+&gt;       expect(page.locator("#user-name")).to_have_text(
+            "Wrong Username"
+        )
+E       AssertionError: Locator expected to have text 'Wrong Username'
+E       Actual value:  
+E       Call log:
+E         - Expect "to_have_text" locator("#user-name") with timeout 5000ms
+E         - waiting for locator("#user-name")
+E           14 × locator resolved to &lt;input value="" type="text" id="user-name" name="user-name" autocorrect="off" data-test="username" aria-label="Username" autocapitalize="none" placeholder="Username" class="input_error form_input"/&gt;
+E              - unexpected value ""
+E       
+E       Aria snapshot:
+E       - textbox "Username"
+
+tests\test_screenshots_on_failure.py:12: AssertionError</failure></testcase><testcase classname="tests.test_selective_execution" name="test_login_page" time="1.289" /><testcase classname="tests.test_selective_execution" name="test_valid_login" time="2.968" /><testcase classname="tests.test_selective_execution" name="test_invalid_login" time="2.825" /><testcase classname="tests.test_storage_state_reuse" name="test_storage_state_reuse" time="5.380" /><testcase classname="tests.test_trace_viewer" name="test_trace_viewer" time="4.045" /><testcase classname="tests.test_video_recording" name="test_video_recording" time="3.831" /><testcase classname="tests.test_writing_pytest" name="test_valid_login" time="0.002"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_valid_login():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_writing_pytest.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x0000018665A55B80&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_writing_pytest" name="test_invalid_login" time="0.001"><failure message="playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.&#10;Please use the Async API instead.">def test_invalid_login():
+    
+&gt;       with sync_playwright() as p:
+             ^^^^^^^^^^^^^^^^^
+
+tests\test_writing_pytest.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright.sync_api._context_manager.PlaywrightContextManager object at 0x0000018665A54050&gt;
+
+        def __enter__(self) -&gt; SyncPlaywright:
+            try:
+                self._loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self._loop = asyncio.new_event_loop()
+                self._own_loop = True
+            if self._loop.is_running():
+&gt;               raise Error(
+                    """It looks like you are using Playwright Sync API inside the asyncio loop.
+    Please use the Async API instead."""
+                )
+E               playwright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.
+E               Please use the Async API instead.
+
+.venv\Lib\site-packages\playwright\sync_api\_context_manager.py:46: Error</failure></testcase><testcase classname="tests.test_xpath_locators" name="test_xpath_locators" time="3.374" /><testcase classname="tests.validation.test_base_api_class" name="test_base_api_get" time="0.421" /><testcase classname="tests.validation.test_base_api_class" name="test_base_api_post" time="0.478" /><testcase classname="tests.validation.test_data_driven_api" name="test_get_post_with_multiple_data[1-1]" time="0.377" /><testcase classname="tests.validation.test_data_driven_api" name="test_get_post_with_multiple_data[11-2]" time="0.479" /><testcase classname="tests.validation.test_data_driven_api" name="test_get_post_with_multiple_data[21-3]" time="0.392" /><testcase classname="tests.validation.test_data_driven_api" name="test_get_post_with_multiple_data[31-4]" time="0.365" /><testcase classname="tests.validation.test_data_driven_api" name="test_get_post_with_multiple_data[41-5]" time="0.371" /><testcase classname="tests.validation.test_response_time" name="test_get_response_time" time="0.375" /><testcase classname="tests.validation.test_response_time" name="test_post_response_time" time="0.488" /><testcase classname="tests.validation.test_reusable_api_utilities" name="test_get_using_utility" time="0.384" /><testcase classname="tests.validation.test_reusable_api_utilities" name="test_post_using_utility" time="0.482" /><testcase classname="tests.validation.test_status_code_validation" name="test_get_status_code" time="0.378" /><testcase classname="tests.validation.test_status_code_validation" name="test_post_status_code" time="0.484" /><testcase classname="tests.validation.test_status_code_validation" name="test_not_found_status_code" time="0.403" /><testcase classname="tests.validation.test_validation_logging_reporting" name="test_api_logging_and_reporting" time="0.377" /><testcase classname="tests.validation.test_validation_schema_validation" name="test_post_response_schema" time="0.600" /></testsuite></testsuites>

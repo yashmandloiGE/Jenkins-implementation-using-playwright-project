@@ -1,0 +1,14 @@
+{
+    "qa": {
+        "base_url": "https://jsonplaceholder.typicode.com",
+        "timeout": 10
+    },
+    "staging": {
+        "base_url": "https://jsonplaceholder.typicode.com",
+        "timeout": 15
+    },
+    "production": {
+        "base_url": "https://jsonplaceholder.typicode.com",
+        "timeout": 20
+    }
+}

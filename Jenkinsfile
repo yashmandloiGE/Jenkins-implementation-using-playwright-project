@@ -14,7 +14,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat '''
-                    venv\\Scripts\\pytest.exe test_automation.py --junitxml=results.xml
+                    venv\\Scripts\\python.exe -m pytest test_automation.py --junitxml=results.xml
                 '''
             }
         }
